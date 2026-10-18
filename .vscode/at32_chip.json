@@ -1,0 +1,11 @@
+{
+  "projectName": "DAPLink_AT32F425",
+  "chip": "AT32F425F8P7",
+  "series": "AT32F425",
+  "productLine": "Value line",
+  "flash": "64KB+4KB",
+  "sram": "20KB",
+  "frequency": "96MHz",
+  "core": "M4",
+  "package": "20-in TSSOP"
+}

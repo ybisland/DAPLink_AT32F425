@@ -1,0 +1,25 @@
+# CMake and Ninja build output
+/build/
+/cmake-build-*/
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/build.ninja
+/.ninja_deps
+/.ninja_log
+/compile_commands.json
+
+# clangd index/cache
+/.cache/
+
+# Firmware artifacts generated in the project root
+/*.elf
+/*.hex
+/*.bin
+/*.map
+
+# Editor and operating system files
+*.swp
+*~
+.DS_Store
+Thumbs.db

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+    <WorkBenchVersion>
+        <Version>V1.2.06</Version>
+    </WorkBenchVersion>
+    <MCUInfo>
+        <MCUSerials>AT32F425</MCUSerials>
+        <MCUName>AT32F425F8P7</MCUName>
+        <MCUPackage>TSSOP20</MCUPackage>
+    </MCUInfo>
+    <ACC>
+        <Mode>
+            <ModeSub name="ACC_State" value="TRUE"/>
+        </Mode>
+    </ACC>
+    <DEBUG>
+        <Mode>
+            <ModeSub name="SWD" value="TRUE"/>
+        </Mode>
+    </DEBUG>
+    <SCFG>
+        <Mode>
+            <ModeSub name="PA11 PA12 remap" value="TRUE"/>
+        </Mode>
+    </SCFG>
+    <SYSTEM>
+        <Mode>
+            <ModeSub name="Time_Base" value="SysTick"/>
+        </Mode>
+    </SYSTEM>
+    <USB_OTGFS1>
+        <Mode>
+            <ModeSub name="Mode" value="Device_Only"/>
+        </Mode>
+    </USB_OTGFS1>
+    <NVIC>
+        <SysTick_Handler>1;15;0;0;0;1</SysTick_Handler>
+        <FLASH_IRQHandler>0;0;0;0;0;0</FLASH_IRQHandler>
+        <CRM_IRQHandler>0;0;0;0;0;0</CRM_IRQHandler>
+        <ACC_IRQHandler>0;0;0;0;0;0</ACC_IRQHandler>
+        <OTGFS1_IRQHandler>0;0;0;0;0;0</OTGFS1_IRQHandler>
+    </NVIC>
+    <ClockConfiguration>
+        <rtcsel>0</rtcsel>
+        <hext>8.000000</hext>
+        <pllhextdiv>0</pllhextdiv>
+        <pllrcs>1</pllrcs>
+        <pllmode>0</pllmode>
+        <pllmult>24</pllmult>
+        <pllms>1</pllms>
+        <pllns>96</pllns>
+        <pllfr>8</pllfr>
+        <sclkselect>1</sclkselect>
+        <ahbdiv>1</ahbdiv>
+        <apb1div>1</apb1div>
+        <apb2div>1</apb2div>
+        <usbdiv>2.0</usbdiv>
+        <hicktousb>1</hicktousb>
+        <hicktosclk>0</hicktosclk>
+        <clkout>0</clkout>
+        <clkoutdiv>1</clkoutdiv>
+        <adcdiv>4</adcdiv>
+        <systicsel>8</systicsel>
+    </ClockConfiguration>
+    <PINInfo>
+        <PinSub pinname="PA11 [PA9]" signalname="USB_OTGFS1_D-" signaltype="2"/>
+        <PinSub pinname="PA12 [PA10]" signalname="USB_OTGFS1_D+" signaltype="2"/>
+        <PinSub pinname="PA13" signalname="DEBUG_SWDIO" signaltype="2"/>
+        <PinSub pinname="PA14" signalname="DEBUG_SWCLK" signaltype="2"/>
+    </PINInfo>
+    <ProjectInfomation>
+        <ProjectName>DAPLink_AT32F425</ProjectName>
+        <ProjectLocation>C:/Users/yinbi/Desktop/WorkSpace/daplink_at32f415</ProjectLocation>
+        <ToolchainIDE>CMake</ToolchainIDE>
+        <ARMCompiler>0</ARMCompiler>
+        <BackupCode>true</BackupCode>
+        <KeepUserCode>true</KeepUserCode>
+        <NotUsedPinAnalog>false</NotUsedPinAnalog>
+        <CodeSplitIP>false</CodeSplitIP>
+        <AddNecessaryFileFlag>false</AddNecessaryFileFlag>
+        <DeletePriviousFiles>true</DeletePriviousFiles>
+        <MinHeapSize>0x200</MinHeapSize>
+        <MinStackSize>0x400</MinStackSize>
+        <UseFirmware>true</UseFirmware>
+        <PackageVersion>V2.1.4</PackageVersion>
+    </ProjectInfomation>
+    <FunctionRankInfo>
+        <RankSub RankNum="1" FixPosFlag="TRUE" FuncName="wk_system_clock_config" InstanceName="CRM" CodeSection="config_system_clock_rtthread" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="2" FixPosFlag="TRUE" FuncName="wk_periph_clock_config" InstanceName="CRM" CodeSection="config periph clock" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="3" FixPosFlag="TRUE" FuncName="wk_scfg_init" InstanceName="SCFG" CodeSection="scfg function" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="7" FixPosFlag="TRUE" FuncName="wk_nvic_config" InstanceName="NVIC" CodeSection="config nvic" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="8" FixPosFlag="TRUE" FuncName="wk_timebase_init" InstanceName="SYSTEM" CodeSection="config timebase" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="22" FixPosFlag="FALSE" FuncName="wk_acc_init" InstanceName="ACC" CodeSection="acc function" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="23" FixPosFlag="FALSE" FuncName="wk_usb_otgfs1_init" InstanceName="USB_OTGFS1" CodeSection="usb_otgfs1 function" MainDoNotCallFlag="FALSE"/>
+    </FunctionRankInfo>
+</Root>
