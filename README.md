@@ -1,5 +1,7 @@
 # DAPLink for AT32F425
 
+> ⚠️ This project is in testing phase.
+> 
 CMSIS-DAP firmware for the Artery AT32F425F8P7. The firmware uses CherryDAP for the debug protocol and CherryUSB for the USB device stack.
 
 ## Features
@@ -53,7 +55,10 @@ The AT32F425 has 20 KiB of SRAM, so this project reduces the buffers to:
 
 The firmware is under testing.
 
+## Board
+
+The schematic and PCB are open-sourced on [OSHWhub](oshwhub.com) and are currently under review. The link will be added once the review is complete.
+
 ## TODO
 
 - Accelerate SWD and SWC with SPI.
-- Open source scheme and PCB.
