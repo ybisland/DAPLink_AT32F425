@@ -58,6 +58,7 @@ extern "C" {
 #define GPIO_MODULE_ENABLED
 #define USART_MODULE_ENABLED
 #define DMA_MODULE_ENABLED
+#define SPI_MODULE_ENABLED
 #define FLASH_MODULE_ENABLED
 #define MISC_MODULE_ENABLED
 #define SCFG_MODULE_ENABLED
@@ -70,7 +71,6 @@ extern "C" {
 /* #define USB_MODULE_ENABLED */
 /* #define PWC_MODULE_ENABLED */
 /* #define ADC_MODULE_ENABLED */
-/* #define SPI_MODULE_ENABLED */
 /* #define DEBUG_MODULE_ENABLED */
 /* #define CRC_MODULE_ENABLED */
 /* #define WWDT_MODULE_ENABLED */

@@ -18,9 +18,9 @@ This project uses AT32F425F8P7 (20-pin TSSOP, 64 KiB Flash, 20 KiB SRAM).
 | --- | --- | --- |
 | USB D- | PA9 | SCFG remaps USB PA11 to PA9 |
 | USB D+ | PA10 | SCFG remaps USB PA12 to PA10 |
-| Target SWCLK | PA5 | GPIO bit-banged SWD |
+| Target SWCLK | PA5 | GPIO or SPI1 SCK, depending on the build preset |
 | Target SWDIO input | PA6 | Separate input from SWDIO output |
-| Target SWDIO output | PA7 | Separate output to the target interface |
+| Target SWDIO output | PA7 | GPIO or SPI1 MOSI; separate from the SWDIO input |
 | Target nRESET | PA4 | Controlled by CMSIS-DAP |
 | Target SWO input | PA3 | USART2 RX |
 | USB-UART TX | PA0 | USART4 TX |
@@ -35,7 +35,14 @@ This project uses AT32F425F8P7 (20-pin TSSOP, 64 KiB Flash, 20 KiB SRAM).
 
 Open this repository folder with VSCode and AT32 VSCode IDE plugin, then the toolchain will be set up automatically.
 
-Compile the project with buttons of AT32 VSCode IDE plugin or using cmake commands.
+Use the following commands to build the firmware:
+```sh
+cmake --build --preset gpio
+cmake --build --preset spi
+```
+
+The `gpio` preset sets `DAP_SWD_SPI=0` and writes `build/gpio/DAPLink_AT32F425.hex`.
+The `spi` preset sets `DAP_SWD_SPI=1` and writes `build/spi/DAPLink_AT32F425.hex`.
 
 ## Details
 

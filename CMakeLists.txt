@@ -30,6 +30,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 project(${CMAKE_PROJECT_NAME})
 message("Build type: " ${CMAKE_BUILD_TYPE})
 
+# Select the SWD transport with -DDAP_SWD_SPI=0 (GPIO) or =1 (SPI-assisted).
+set(DAP_SWD_SPI 0 CACHE STRING "Select SWD transport: 0=GPIO, 1=SPI")
+set_property(CACHE DAP_SWD_SPI PROPERTY STRINGS 0 1)
+if(NOT "${DAP_SWD_SPI}" STREQUAL "0" AND NOT "${DAP_SWD_SPI}" STREQUAL "1")
+    message(FATAL_ERROR "DAP_SWD_SPI must be 0 (GPIO) or 1 (SPI)")
+endif()
+
 # Enable CMake support for ASM and C languages
 enable_language(C ASM)
 
@@ -52,6 +59,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     project/src/cdc_usb2uart.c
     project/src/swo_usart_driver.c
     project/port/dap_main.c
+    project/port/dap_swd_spi.c
 
     ${CHERRYUSB_ROOT}/core/usbd_core.c
     ${CHERRYUSB_ROOT}/class/cdc/usbd_cdc_acm.c
@@ -61,7 +69,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     ${CHERRYDAP_ROOT}/CherryRB/chry_ringbuffer.c
     ${CHERRYDAP_ROOT}/DAP/Source/DAP.c
     ${CHERRYDAP_ROOT}/DAP/Source/DAP_vendor.c
-    ${CHERRYDAP_ROOT}/DAP/Source/SW_DP.c
+    project/port/SW_DP.c
     ${CHERRYDAP_ROOT}/DAP/Source/SWO.c
 )
 
@@ -83,6 +91,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     CONFIG_CHERRYDAP_USE_CUSTOM_HID=0
     CONFIG_CHERRYDAP_USE_MSC=0
+    DAP_SWD_SPI=${DAP_SWD_SPI}
 )
 
 # Add linked libraries

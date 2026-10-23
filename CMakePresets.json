@@ -6,33 +6,34 @@
             "hidden": true,
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
-		    "toolchainFile": "${sourceDir}/cmake/gcc-arm-none-eabi.cmake",
-            "cacheVariables": {
-            }
-        },
-        {
-            "name": "Debug",
-            "inherits": "default",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "Release",
-            "inherits": "default",
+            "toolchainFile": "${sourceDir}/cmake/gcc-arm-none-eabi.cmake",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "gpio",
+            "inherits": "default",
+            "cacheVariables": {
+                "DAP_SWD_SPI": "0"
+            }
+        },
+        {
+            "name": "spi",
+            "inherits": "default",
+            "cacheVariables": {
+                "DAP_SWD_SPI": "1"
             }
         }
     ],
     "buildPresets": [
         {
-            "name": "Debug",
-            "configurePreset": "Debug"
+            "name": "gpio",
+            "configurePreset": "gpio"
         },
         {
-            "name": "Release",
-            "configurePreset": "Release"
+            "name": "spi",
+            "configurePreset": "spi"
         }
     ]
 }

@@ -47,6 +47,14 @@ This information includes:
 #include "stdint.h"
 #include "at32f425_conf.h"
 
+#ifndef DAP_SWD_SPI
+#define DAP_SWD_SPI 0
+#endif
+
+#if DAP_SWD_SPI
+#include "dap_swd_spi.h"
+#endif
+
 #ifndef   __STATIC_INLINE
 #define __STATIC_INLINE                        static inline
 #endif
@@ -376,6 +384,10 @@ __STATIC_INLINE void PORT_SWD_SETUP (void) {
 
   /* Release nRESET as an input with the MCU's internal pull-up enabled. */
   DAP_nRESET_SET_MODE(GPIO_MODE_INPUT, GPIO_PULL_UP);
+
+#if DAP_SWD_SPI
+  DAP_SWD_SPI_Init();
+#endif
 }
 
 /** Disable JTAG/SWD I/O Pins.
@@ -384,6 +396,10 @@ Disables the DAP Hardware I/O pins which configures:
 */
 __STATIC_INLINE void PORT_OFF (void) {
   gpio_init_type gpio_init_struct;
+
+#if DAP_SWD_SPI
+  DAP_SWD_SPI_Deinit();
+#endif
 
   crm_periph_clock_enable(CRM_GPIOA_PERIPH_CLOCK, TRUE);
   crm_periph_clock_enable(CRM_GPIOF_PERIPH_CLOCK, TRUE);

@@ -38,6 +38,7 @@ set(AT32_Drivers_Src
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_misc.c
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_scfg.c
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_acc.c
+    ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_spi.c
 
     # Unused AT32F425 peripheral drivers are excluded from compilation.
     # ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_tmr.c
@@ -45,7 +46,6 @@ set(AT32_Drivers_Src
     # ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_i2c.c
     # ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_pwc.c
     # ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_adc.c
-    # ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_spi.c
     # ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_debug.c
     # ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_crc.c
     # ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32f425_wwdt.c
