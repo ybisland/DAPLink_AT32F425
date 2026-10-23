@@ -57,7 +57,7 @@ The firmware is under testing.
 
 ## Board
 
-The schematic and PCB are open-sourced on [OSHWhub](oshwhub.com) and are currently under review. The link will be added once the review is complete.
+The schematic and PCB are open-sourced on [OSHWhub](https://oshwhub.com/totouidc/project_kcqxfiyp).
 
 ## TODO
 
