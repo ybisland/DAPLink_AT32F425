@@ -1,7 +1,5 @@
 # DAPLink for AT32F425
 
-> ⚠️ This project is in testing phase.
-> 
 CMSIS-DAP firmware for the Artery AT32F425F8P7. The firmware uses CherryDAP for the debug protocol and CherryUSB for the USB device stack.
 
 ## Features
@@ -53,7 +51,7 @@ The AT32F425 has 20 KiB of SRAM, so this project reduces the buffers to:
 
 ## Validation status
 
-The firmware is under testing.
+According to the test, the max rate of daplink is ~10 Mbps, with download speed ~42.6KiB/s.
 
 ## Board
 
@@ -61,4 +59,4 @@ The schematic and PCB are open-sourced on [OSHWhub](https://oshwhub.com/totouidc
 
 ## TODO
 
-- Accelerate SWD and SWC with SPI.
+- Test the max rate of USB-UART.
