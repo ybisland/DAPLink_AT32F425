@@ -73,8 +73,9 @@ static void DAP_SWD_SPI_ConfigureGPIO(uint32_t last_mosi_bit)
 static uint8_t DAP_SWD_SPI_WaitFlag(uint32_t flag, flag_status state)
 {
   uint32_t timeout = DAP_SWD_SPI_WAIT_LIMIT;
+  uint32_t expected = (state == SET) ? flag : 0U;
 
-  while (spi_i2s_flag_get(SPI1, flag) != state) {
+  while ((SPI1->sts & flag) != expected) {
     if (timeout-- == 0U) {
       return 0U;
     }
@@ -90,7 +91,7 @@ static uint8_t DAP_SWD_SPI_Transmit(uint16_t tx_data)
     return 0U;
   }
 
-  spi_i2s_data_transmit(SPI1, tx_data);
+  SPI1->dt = tx_data;
   /* BF can still be clear immediately after writing DT. Wait until the
    * transmit buffer is empty before using BF to detect the final bit. */
   if (DAP_SWD_SPI_WaitFlag(SPI_I2S_TDBE_FLAG, SET) == 0U) {
@@ -106,11 +107,11 @@ static uint8_t DAP_SWD_SPI_Transmit32Data(uint32_t tx_data)
     return 0U;
   }
 
-  spi_i2s_data_transmit(SPI1, (uint16_t)tx_data);
+  SPI1->dt = (uint16_t)tx_data;
   if (DAP_SWD_SPI_WaitFlag(SPI_I2S_TDBE_FLAG, SET) == 0U) {
     return 0U;
   }
-  spi_i2s_data_transmit(SPI1, (uint16_t)(tx_data >> 16));
+  SPI1->dt = (uint16_t)(tx_data >> 16);
   if (DAP_SWD_SPI_WaitFlag(SPI_I2S_TDBE_FLAG, SET) == 0U) {
     return 0U;
   }
@@ -205,7 +206,7 @@ void DAP_SWD_SPI_Init(void)
 void DAP_SWD_SPI_Deinit(void)
 {
   if (s_spi_active != 0U) {
-    DAP_SWD_SPI_End(1U);
+    DAP_SWD_SPI_End(1U, 0U);
   }
 
   if (s_port_ready != 0U) {
@@ -251,12 +252,12 @@ uint8_t DAP_SWD_SPI_Begin(uint8_t frame_bits)
     s_frame_bits = frame_bits;
     s_spi_configured = 1U;
   } else if (s_frame_bits != frame_bits) {
-    spi_frame_bit_num_set(SPI1, (frame_bits == 16U) ? SPI_FRAME_16BIT : SPI_FRAME_8BIT);
+    SPI1->ctrl1_bit.fbn = (frame_bits == 16U) ? SPI_FRAME_16BIT : SPI_FRAME_8BIT;
     s_frame_bits = frame_bits;
   }
   /* Keep PA5 as GPIO high while SPI takes its idle-high state. Switching
    * the pin to AF before programming CLKPOL can create a stray SWCLK edge. */
-  spi_enable(SPI1, TRUE);
+  SPI1->ctrl1_bit.spien = TRUE;
   DAP_SWD_SPI_ConfigureTxMux();
   s_spi_active = 1U;
 
@@ -273,14 +274,18 @@ uint8_t DAP_SWD_SPI_Transmit32(uint32_t tx_data)
   return DAP_SWD_SPI_Transmit32Data(tx_data);
 }
 
-void DAP_SWD_SPI_End(uint32_t last_mosi_bit)
+void DAP_SWD_SPI_End(uint32_t last_mosi_bit, uint8_t transfer_complete)
 {
-  (void)DAP_SWD_SPI_WaitFlag(SPI_I2S_TDBE_FLAG, SET);
-  (void)DAP_SWD_SPI_WaitFlag(SPI_I2S_BF_FLAG, RESET);
+  /* Successful transmit functions already waited for TDBE and BF. Retain
+   * the waits when ending a burst after a failed transmit. */
+  if (transfer_complete == 0U) {
+    (void)DAP_SWD_SPI_WaitFlag(SPI_I2S_TDBE_FLAG, SET);
+    (void)DAP_SWD_SPI_WaitFlag(SPI_I2S_BF_FLAG, RESET);
+  }
   /* Return SWCLK to the preloaded GPIO-high output before disabling SPI,
    * so the peripheral's disabled state cannot add a falling edge. */
   DAP_SWD_SPI_ConfigureGPIO(last_mosi_bit);
-  spi_enable(SPI1, FALSE);
+  SPI1->ctrl1_bit.spien = FALSE;
   s_spi_active = 0U;
 }
 

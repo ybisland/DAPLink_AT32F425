@@ -15,6 +15,6 @@ uint8_t DAP_SWD_SPI_IsAvailable(void);
 uint8_t DAP_SWD_SPI_Begin(uint8_t frame_bits);
 uint8_t DAP_SWD_SPI_Transmit8(uint8_t tx_data);
 uint8_t DAP_SWD_SPI_Transmit32(uint32_t tx_data);
-void DAP_SWD_SPI_End(uint32_t last_mosi_bit);
+void DAP_SWD_SPI_End(uint32_t last_mosi_bit, uint8_t transfer_complete);
 
 #endif

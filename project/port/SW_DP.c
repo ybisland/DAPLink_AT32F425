@@ -327,10 +327,10 @@ static uint8_t SWD_TransferSPI(uint32_t request, uint32_t *data) {
     return DAP_TRANSFER_ERROR;
   }
   if (DAP_SWD_SPI_Transmit8(request_byte) == 0U) {
-    DAP_SWD_SPI_End(1U);
+    DAP_SWD_SPI_End(1U, 0U);
     return DAP_TRANSFER_ERROR;
   }
-  DAP_SWD_SPI_End(1U);
+  DAP_SWD_SPI_End(1U, 1U);
 
   /* Turnaround and ACK are sampled with GPIO so SWDIO can change direction. */
   PIN_SWDIO_OUT_DISABLE();
@@ -388,10 +388,10 @@ static uint8_t SWD_TransferSPI(uint32_t request, uint32_t *data) {
 
       if (DAP_SWD_SPI_Begin(16U) != 0U) {
         if (DAP_SWD_SPI_Transmit32(val) == 0U) {
-          DAP_SWD_SPI_End((val >> 31) & 1U);
+          DAP_SWD_SPI_End((val >> 31) & 1U, 0U);
           return DAP_TRANSFER_ERROR;
         }
-        DAP_SWD_SPI_End((val >> 31) & 1U);
+        DAP_SWD_SPI_End((val >> 31) & 1U, 1U);
       } else {
         for (n = 32U; n; n--) {
           SWD_SPI_GPIO_WriteBit(val);
