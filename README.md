@@ -66,6 +66,33 @@ The firmware is under testing.
 
 The schematic and PCB are open-sourced on [OSHWhub](https://oshwhub.com/totouidc/project_kcqxfiyp).
 
-## TODO
+## SPI 开发情况
 
-- Accelerate SWD and SWC with SPI.
+CMake 区分了两个构建目标，gpio（普通版本，bit-bang） 和 spi（spi加速版本）。
+
+gpio 版本最高速度10MHz，测试下载速度 ~42.6KiB/s，而spi版本在12MHz下速度为 ~45.5KiB/s，提升不大，因此spi版本暂未启用。
+
+spi 版本有缺陷，
+
+1. spi 速率只有固定的几个，如下：
+
+| 实际速率 | 分频 |
+| ---: | ---: |
+| 32 MHz | ÷3 |
+| 24 MHz | ÷4 |
+| 12 MHz | ÷8 |
+| 6 MHz | ÷16 |
+| 3 MHz | ÷32 |
+| 1.5 MHz | ÷64 |
+| 750 kHz | ÷128 |
+| 375 kHz | ÷256 |
+| 187.5 kHz | ÷512 |
+| 93.75 kHz | ÷1024 |
+
+F425 最高只能到 32MHz，如果设置 10MHz，实际使用的是 6 MHz，因此速率并不是很灵活。
+
+2. 在 SC32F12T 上进行测试，SPI速度最快只能用 12MHz，24MHz及以上就会报错。
+
+无法确定是Target MCU的SWD速率限制，还是固件问题，还是硬件问题。在这个情况下，SPI最多 12MHz，带来的速度提升并不大。
+
+如果进一步确定，可以使用其他芯片如STM32再进行24MHz的测试。
