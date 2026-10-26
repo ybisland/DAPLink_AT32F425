@@ -5,7 +5,7 @@ CMSIS-DAP firmware for the Artery AT32F425F8P7. The firmware uses CherryDAP for 
 ## Features
 
 - CMSIS-DAP over USB HID
-- Support USB-to-UART and SWO
+- Support USB-to-UART (maximum baud rate is 6 Mbaud) and SWO
 - SWD only, JTAG and MSC drag-and-drop programming are not supported
 
 ## Target and pin assignment
@@ -51,12 +51,10 @@ The AT32F425 has 20 KiB of SRAM, so this project reduces the buffers to:
 
 ## Validation status
 
-According to the test, the max rate of daplink is ~10 Mbps, with download speed ~42.6KiB/s.
+**SWD download test:** SWCLK reached nearly 10 MHz. As a rule of thumb, a stable SWCLK is about one-tenth of the MCU clock.
+
+**CDC UART:** It runs stably at the USART peripheral's maximum baud rate of 6 Mbaud. Since this is close to the throughput limit of USB Full-Speed Bulk transfers, actual throughput may be bottlenecked by USB.
 
 ## Board
 
 The schematic and PCB are open-sourced on [OSHWhub](https://oshwhub.com/totouidc/project_kcqxfiyp).
-
-## TODO
-
-- Test the max rate of USB-UART.
