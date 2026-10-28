@@ -261,13 +261,13 @@ const uint8_t hid_custom_report_desc[HID_CUSTOM_REPORT_DESC_SIZE] = {
     0xC0 /*     END_COLLECTION	             */
 };
 
-char serial_number_dynamic[36] = "123456789"; // Dynamic serial number
+char serial_number_dynamic[36] = "0000123456789"; // Dynamic serial number
 
 char *string_descriptors[] = {
     (char[]){ 0x09, 0x04 },             /* Langid */
     "CMSIS-DAP",                        /* Manufacturer */
     "CMSIS-DAP",                        /* Product */
-    "123456789",                        /* Serial Number */
+    "0000123456789",                        /* Serial Number */
     "CMSIS-DAP WebUSB",
 };
 
