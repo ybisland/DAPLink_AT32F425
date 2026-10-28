@@ -39,7 +39,7 @@ add_executable(${CMAKE_PROJECT_NAME})
 # Add at32_workbench generated sources
 add_subdirectory(cmake/at32_workbench)
 
-set(CHERRYDAP_ROOT ${CMAKE_SOURCE_DIR}/third_part/CherryDAP)
+set(CHERRYDAP_ROOT ${CMAKE_SOURCE_DIR}/third_party/CherryDAP)
 set(CHERRYUSB_ROOT ${CHERRYDAP_ROOT}/CherryUSB)
 
 # Link directories setup
